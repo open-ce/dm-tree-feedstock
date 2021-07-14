@@ -13,9 +13,6 @@ source:
 
 build:
   number: 2
-  ignore_run_exports:
-    - libgcc-ng
-    - libstdcxx-ng
 
 requirements:
   build:
@@ -33,9 +30,6 @@ requirements:
   run:
     - python {{ python }}
     - six {{ six }}
-    # Use pins to control cos6/cos7 match
-    - libgcc-ng  {{ libgcc }}
-    - libstdcxx-ng  {{ libstdcxx }}
 
 test:
   imports:
