@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2020, 2021. All Rights Reserved.
+# (C) Copyright IBM Corp. 2020, 2023. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,12 @@
 # limitations under the License.
 # *****************************************************************
 
+source open-ce-common-utils.sh
+
 ${PYTHON} setup.py install --single-version-externally-managed --record record.txt
 
 # Above call invokes bazel build. Ensure bazel is shutdown.
-bazel shutdown
+PID=$(bazel info server_pid)
+echo "PID: $PID"
+cleanup_bazel $PID
+
