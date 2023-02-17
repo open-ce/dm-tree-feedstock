@@ -15,7 +15,11 @@
 # limitations under the License.
 # *****************************************************************
 
+source open-ce-common-utils.sh
+
 ${PYTHON} setup.py install --single-version-externally-managed --record record.txt
 
 # Above call invokes bazel build. Ensure bazel is shutdown.
-bazel shutdown
+PID=$(bazel info server_pid)
+echo "PID: $PID"
+cleanup_bazel $PID
