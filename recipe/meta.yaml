@@ -19,6 +19,8 @@ requirements:
     - {{ compiler('c') }}      # [ ppc_arch != "p10"]
     - {{ compiler('cxx') }}    # [ ppc_arch != "p10"]
     - bazel {{ bazel }}
+    - cmake {{ cmake }}
+    - make
   host:
     - python {{ python }}
   run:
