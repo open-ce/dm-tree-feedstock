@@ -19,6 +19,10 @@ source open-ce-common-utils.sh
 
 ${PYTHON} setup.py install --single-version-externally-managed --record record.txt
 
+
+echo "Go back to source dir again"
+cd $SRC_DIR/tree/abseil-cpp/src/abseil-cpp
+echo "ls -l"
 # Above call invokes bazel build. Ensure bazel is shutdown.
 PID=$(bazel info server_pid)
 echo "PID: $PID"
