@@ -1,6 +1,6 @@
 {% set name = "dm-tree" %}
-{% set version = "0.1.7" %}
-{% set sha256 = "30fec8aca5b92823c0e796a2f33b875b4dccd470b57e91e6c542405c5f77fd2a" %}
+{% set version = "0.1.8" %}
+{% set sha256 = "0fcaabbb14e7980377439e7140bd05552739ca5e515ecb3119f234acee4b9430" %}
 
 package:
   name: {{ name|lower }}
