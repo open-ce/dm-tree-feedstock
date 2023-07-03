@@ -1,0 +1,30 @@
+From d8d4e035ca644854573c2ff2e2b0902764fed85b Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Mon, 3 Jul 2023 13:31:16 +0000
+Subject: [PATCH] Fixed linker error with dm_tree import due to abseil symbol
+
+---
+ tree/CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tree/CMakeLists.txt b/tree/CMakeLists.txt
+index 44a09a8..82e29f9 100644
+--- a/tree/CMakeLists.txt
++++ b/tree/CMakeLists.txt
+@@ -108,10 +108,10 @@ endif()
+ 
+ # Link abseil static libs.
+ # We don't use find_library here to force cmake to build abseil before linking.
+-set(ABSEIL_LIBS int128 raw_hash_set raw_logging_internal strings throw_delegate)
++set(ABSEIL_LIBS int128 raw_hash_set raw_logging_internal strings strings_internal throw_delegate)
+ foreach(ABSEIL_LIB IN LISTS ABSEIL_LIBS)
+-  target_link_libraries(_tree PRIVATE
+-      "${abseil_install_dir}/lib/${ABSEIL_LIB_PREF}_${ABSEIL_LIB}.${LIB_SUFF}")
++  target_link_libraries(_tree PRIVATE -Wl,--whole-archive
++      "${abseil_install_dir}/lib/${ABSEIL_LIB_PREF}_${ABSEIL_LIB}.${LIB_SUFF}" -Wl,--no-whole-archive)
+ endforeach()
+ 
+ # Make the module private to tree package.
+-- 
+2.40.1
+
